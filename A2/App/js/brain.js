@@ -1,7 +1,9 @@
 function login(){
 	var un = document.getElementById("username").value;
 	localStorage.setItem("username", un);
-	localStorage.setItem(un, JSON.stringify([]));
+	if(localStorage.getItem(un)===null){
+		localStorage.setItem(un, JSON.stringify([]));
+	}
 }
 
 function setCenter(location,access_token,map){
