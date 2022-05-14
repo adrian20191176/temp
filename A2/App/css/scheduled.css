@@ -1,0 +1,62 @@
+.form-holder{
+    margin: 3% 10%;
+    margin-bottom: 0;
+    padding-bottom: 100px;
+    width: 80%;
+    background-color: #ffffff;
+    text-align: center;
+}
+
+.form-holder >h1{
+  padding-top: 20px;
+  font-family:'Berlin Sans FB';
+  color: #444444;
+}
+.form-holder >h4{
+  font-family:'Berlin Sans FB';
+  color: #444444;
+}
+
+.container {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: auto ;
+    width: 40%;
+    margin: auto;
+}
+
+.container input {
+  height: 50px;
+  font-size: large;
+  padding: 10px ;
+}
+
+.container button {
+  
+  height: 50px;
+  border-radius: 10px;
+  width: 100%;
+  color: white;
+  background-color: #009688;
+  border: none;
+  font-size: large;
+  font-weight: bolder;
+}.container button:hover{
+  cursor: pointer;
+}
+
+
+.form-holder>div{
+  font-size: large;
+  color: white;
+  border: 5px solid #969696;
+  background-color: #444444;
+  margin: 3% 10%;
+  padding: 40px;
+}
+
+.form-holder>div:hover{
+  color: black;
+  background-color: #888888;
+  cursor: pointer;
+}

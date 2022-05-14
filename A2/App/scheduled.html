@@ -10,7 +10,7 @@
   <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css' rel='stylesheet' />
   
         
-  <link rel="stylesheet" href="CSS/login.css" />
+  <link rel="stylesheet" href="CSS/scheduled.css" />
   <link rel="stylesheet" href="CSS/schedule.css" />
   <link rel="stylesheet" href="CSS/material.min.css"/>
 </head>
@@ -22,7 +22,7 @@
       <header class="mdl-layout__header mdl-layout__header--scroll">
         <div class="mdl-layout__header-row">
       <!-- Title -->
-      <span class="mdl-layout-title">Your Trips</span>
+      <span class="mdl-layout-title">Fly Team B</span>
       <!-- Add spacer, to align navigation to the right -->
       <div class="mdl-layout-spacer"></div>
       <!-- Navigation -->
@@ -35,7 +35,7 @@
     </header>
   </div>
   <div class="form-holder" id="trips">
-    <h1>Fly Team B</h1>
+    <h1>Your Scheduled Trips</h1>
   </div>
 </body>
 <script>
@@ -44,8 +44,9 @@
   var trips = JSON.parse(localStorage.getItem(un));
   for(var i =0;i<trips.length;i++){
     var tem = trips[i].split("|");
-    console.log(trips[i]);
-    var row = document.createElement('h7');
+    const row = document.createElement('div');
+    row.id = trips[i];
+    row.addEventListener("click",() => {localStorage.setItem("display",row.id); location.replace('scheduledTrip.html')});
     row.textContent = tem[0] + " From " + tem[4] + " To "+tem[5];
     container.append(row);
   }

@@ -6,7 +6,6 @@ function login(){
 
 function setCenter(location,access_token,map){
 	var country = location.replaceAll(" ","+");
-	console.log(country);
 
 	let url = "https://api.mapbox.com/geocoding/v5/mapbox.places/"+country+".json?access_token="+access_token;
   	let req = new XMLHttpRequest();
@@ -31,7 +30,6 @@ function getAllAirports(access_token,map,tag){
 	req.open('GET', url, true);
 	req.onload = function() {
   		var dataObj = JSON.parse(req.response);
-		console.log(dataObj);
 		if(dataObj.features.length>0){
 			markAllAirports(dataObj,map);
 		}else{
@@ -52,7 +50,6 @@ function markAllAirports(loca,map){
 			.setLngLat(temploca.center) // Marker [lng, lat] coordinates
 			.addTo(map);
 			marker.id = temploca.geometry.coordinates[0]+","+temploca.geometry.coordinates[1];
-		console.log(temploca);
 		for(var d=0;d<2;d++){
 			var opt = document.createElement('option');
 			opt.text = temploca.place_name.split(',')[0];
@@ -68,7 +65,7 @@ function getRoute(start,end,map) {
 	// make a directions request using cycling profile
 	// an arbitrary start will always be the same
 	// only the end or destination will change
-	const url = "https://api.mapbox.com/directions/v5/mapbox/driving/"+start+";"+end+"?geometries=geojson&access_token=pk.eyJ1IjoiYW5jaGVsb2FkcmlhbiIsImEiOiJjbDM0b2JibXUydmZqM2lwZjN2bWt0bXdmIn0._8vWl-iZML98QWAjsCSvYA";
+	const url = "https://api.mapbox.com/directions/v5/mapbox/cycling/"+start+";"+end+"?geometries=geojson&access_token=pk.eyJ1IjoiYW5jaGVsb2FkcmlhbiIsImEiOiJjbDM0b2JibXUydmZqM2lwZjN2bWt0bXdmIn0._8vWl-iZML98QWAjsCSvYA";
 
 	map = new mapboxgl.Map({
 		container: 'map',
@@ -83,7 +80,7 @@ function getRoute(start,end,map) {
 		var dataObj = JSON.parse(req.response);
 		var data = dataObj.routes[0];
 		const route = data.geometry.coordinates;
-		console.log(data);
+
 		const geojson = {
 			type: 'Feature',
 			properties: {},
@@ -92,7 +89,6 @@ function getRoute(start,end,map) {
 			  coordinates: route
 			}
 		  };
-		  console.log(geojson);
 		
 		  map.addLayer({
 			id: 'route',
@@ -132,7 +128,6 @@ function getRoute(start,end,map) {
  }
   
   const removeChilds = (parent) => {
-	  console.log("removing");
     	while (parent.lastChild!==null) {
         parent.removeChild(parent.lastChild);
 	}
