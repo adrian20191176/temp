@@ -22,7 +22,7 @@
       <header class="mdl-layout__header mdl-layout__header--scroll">
         <div class="mdl-layout__header-row">
       <!-- Title -->
-      <span class="mdl-layout-title">Fly Team B</span>
+      <span class="mdl-layout-title">Your Trips</span>
       <!-- Add spacer, to align navigation to the right -->
       <div class="mdl-layout-spacer"></div>
       <!-- Navigation -->
@@ -42,8 +42,12 @@
   var container = document.getElementById("trips");
   var un = localStorage.getItem("username");
   var trips = JSON.parse(localStorage.getItem(un));
-  for(var i =0;i<=trips.length;i++){
+  for(var i =0;i<trips.length;i++){
+    var tem = trips[i].split("|");
     console.log(trips[i]);
+    var row = document.createElement('h7');
+    row.textContent = tem[0] + " From " + tem[4] + " To "+tem[5];
+    container.append(row);
   }
 </script>
 </html>
