@@ -1,0 +1,65 @@
+.container {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: auto ;
+    text-align: center;
+    padding: 10%;
+    padding-top: 0;
+    align-items: center;
+}
+
+.container input {
+  height: 50px;
+  font-size: large;
+  padding: 10px ;
+}
+
+
+.container >h3{
+  padding-top: 20px;
+  font-family:'Berlin Sans FB';
+  color: #444444;
+}
+
+.container button {
+  
+  height: 50px;
+  border-radius: 10px;
+  width: 100%;
+  color: white;
+  background-color: #009688;
+  border: none;
+  font-size: large;
+  font-weight: bolder;
+}
+
+.container button:hover{
+  cursor: pointer;
+}
+
+
+.container2 {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 30% 70% ;
+  width: 90%;
+  background-color: white;
+  height: 80%;
+  margin: auto;
+  margin-top: 50px;
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+}
+
+#form{
+
+}
+
+select{
+  height: 50px;
+  width: 100%;
+  font-size: large;
+}

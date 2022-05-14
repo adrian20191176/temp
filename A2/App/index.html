@@ -1,0 +1,98 @@
+<html>
+<head>
+  <title>Home</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <script src="JS/brain.js"></script>
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js'></script>
+  <script src='JS/countries.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css' rel='stylesheet' />
+  
+        
+  <link rel="stylesheet" href="CSS/schedule.css" />
+  <link rel="stylesheet" href="CSS/material.min.css"/>
+</head>
+
+<body style="background-image: url('img/map.jpg');">
+        <!-- Uses a header that scrolls with the text, rather than staying
+        locked at the top -->
+  <div>
+      <header class="mdl-layout__header mdl-layout__header--scroll">
+        <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">Fly Team B</span>
+      <!-- Add spacer, to align navigation to the right -->
+      <div class="mdl-layout-spacer"></div>
+      <!-- Navigation -->
+      <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" href="login.html">Log out</a>
+        <a class="mdl-navigation__link" href="index.html">Schedule a Trip</a>
+        <a class="mdl-navigation__link" href="scheduled.html">View Scheduled Trips</a>
+      </nav>
+      </div>
+    </header>
+  </div>
+  <div class="container2">
+    <div id="form">
+      <div class="container">
+        <h3>Schedule</h3>
+        <select name="country" id="countries" onchange="changeStartPoint()">
+          <option value="asdasd" selected>SELECT COUNTRY</option>
+        </select>
+        <input type="date" id="date">
+        <select name="start" id="start">
+          <option value="asdasd" selected>Choose Start Location</option>
+        </select>
+        <select name="end" id="end">
+          <option value="asdasd" selected>Choose End Location</option>
+        </select>
+        <button onclick="schedule()">Check Route</button>
+        <a href="index.html"><button onclick="confirm()">Confirm</button></a>
+      </div>
+    </div>
+    <div id="map">
+    </div>
+  </div>
+</body>
+
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYW5jaGVsb2FkcmlhbiIsImEiOiJjbDM0b2JibXUydmZqM2lwZjN2bWt0bXdmIn0._8vWl-iZML98QWAjsCSvYA';
+    const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [0,0], // starting position
+      zoom: 12
+    });
+
+    var dropdown = document.getElementById("countries");
+
+    for(var i=0;i<countryData.length;i++){
+      var opt = document.createElement('option');
+      opt.text = countryData[i];
+      opt.value = countryData[i];
+      dropdown.append(opt);
+    }
+
+    function changeStartPoint(){
+      var center = setCenter(dropdown.value,mapboxgl.accessToken,map);
+    }
+    function schedule(){
+      var dropStart = document.getElementById("start");
+      var dropEnd = document.getElementById("end");
+      getRoute(dropStart.value.split("|")[0],dropEnd.value.split("|")[0],map);
+    }
+
+    function confirm(){
+      var un = localStorage.getItem("username");
+      
+      var dropStart = document.getElementById("start");
+      var dropEnd = document.getElementById("end");
+      var temp = JSON.parse(localStorage.getItem(un));
+      temp.push(`${document.getElementById("date").value}|${dropStart.value.split("|")[0]}|${dropEnd.value.split("|")[0]}|${document.getElementById("countries").value}|${dropStart.value.split("|")[1]}|${dropEnd.value.split("|")[1]}`
+      );
+      localStorage.setItem(un,JSON.stringify(temp));
+      alert("Your trip is scheduled !");
+    }
+</script>
+</html>
